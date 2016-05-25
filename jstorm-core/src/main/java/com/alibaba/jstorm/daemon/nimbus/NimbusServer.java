@@ -65,6 +65,7 @@ public class NimbusServer {
 
     private NimbusData data;
 
+    /// thrift服务接口（提交任务、上传jar、关闭、均衡...）
     private ServiceHandler serviceHandler;
 
     private TopologyAssign topologyAssign;
@@ -80,19 +81,24 @@ public class NimbusServer {
     public static void main(String[] args) throws Exception {
         // read configuration files
         @SuppressWarnings("rawtypes")
+        /// 读取配置文件
         Map config = Utils.readStormConfig();
 
+        /// 启动Jvm监控
         JStormServerUtils.startTaobaoJvmMonitor();
 
+        /// 创建NimbusServer对象
         NimbusServer instance = new NimbusServer();
 
         INimbus iNimbus = new DefaultInimbus();
 
+        /// 启动NimbusServer对象
         instance.launchServer(config, iNimbus);
 
     }
 
     private void createPid(Map conf) throws Exception {
+        /// 创建pid文件路径
         String pidDir = StormConfig.masterPids(conf);
 
         JStormServerUtils.createPid(pidDir);
@@ -103,13 +109,16 @@ public class NimbusServer {
         LOG.info("Begin to start nimbus with conf " + conf);
 
         try {
-            // 1. check whether mode is distributed or not
+            /// 校验运行模式
             StormConfig.validate_distributed_mode(conf);
 
+            /// 创建进程标识文件
             createPid(conf);
 
+            /// 初始化 shutdown 命令钩子
             initShutdownHook();
 
+            ///
             inimbus.prepare(conf, StormConfig.masterInimbus(conf));
 
             data = createNimbusData(conf, inimbus);
@@ -122,9 +131,11 @@ public class NimbusServer {
 
             initContainerHBThread(conf);
 
+            /// 不是learder时睡眠等待
             while (!data.isLeader())
                 Utils.sleep(5000);
 
+            /// 初始化任务
             init(conf);
         } catch (Throwable e) {
             LOG.error("Fail to run nimbus ", e);
@@ -158,22 +169,29 @@ public class NimbusServer {
 
     private void init(Map conf) throws Exception {
 
+        /// 清理关闭的topologies
         NimbusUtils.cleanupCorruptTopologies(data);
 
+        /// 初始化topology任务
         initTopologyAssign();
 
+        /// 初始化topology状态
         initTopologyStatus();
 
+        /// 初始化清理线程
         initCleaner(conf);
 
         serviceHandler = new ServiceHandler(data);
 
+        /// 集群模式下
         if (!data.isLocalMode()) {
         	
         	//data.startMetricThreads();
 
+            /// 监控
             initMonitor(conf);
 
+            /// 服务接口
             initThrift(conf);
 
         }
