@@ -203,7 +203,7 @@ def zktool(*args):
         args=args,
         childopts=childopts)
 
-/// 关闭topology任务
+##关闭topology任务
 def kill(*args):
     """Syntax: [jstorm kill topology-name [wait-time-secs]]
 
@@ -222,7 +222,7 @@ def kill(*args):
         extrajars=[JSTORM_CONF_DIR, JSTORM_DIR + "/bin", CLIENT_CONF_FILE],
         childopts=childopts)
 
-/// 重新启用topology
+## 重新启用topology
 def activate(*args):
     """Syntax: [jstorm activate topology-name]
 
@@ -236,7 +236,7 @@ def activate(*args):
         extrajars=[JSTORM_CONF_DIR, JSTORM_DIR + "/bin", CLIENT_CONF_FILE],
         childopts=childopts)
 
-/// 暂停topology
+## 暂停topology
 def deactivate(*args):
     """Syntax: [jstorm deactivate topology-name]
 
@@ -250,7 +250,7 @@ def deactivate(*args):
         extrajars=[JSTORM_CONF_DIR, JSTORM_DIR + "/bin", CLIENT_CONF_FILE],
         childopts=childopts)
 
-/// 均衡topology
+## 均衡topology
 def rebalance(*args):
     """Syntax: [jstorm rebalance topology-name [-w wait-time-secs]]
 
@@ -276,7 +276,7 @@ def rebalance(*args):
         extrajars=[JSTORM_CONF_DIR, JSTORM_DIR + "/bin", CLIENT_CONF_FILE],
         childopts=childopts)
 
-/// 重启topology
+## 重启topology
 def restart(*args):
     """Syntax: [jstorm restart topology-name [conf]]
     """
@@ -288,7 +288,7 @@ def restart(*args):
         extrajars=[JSTORM_CONF_DIR, JSTORM_DIR + "/bin", CLIENT_CONF_FILE],
         childopts=childopts)
 
-/// 更新配置
+## 更新配置
 def update_topology(*args):
     """Syntax: [jstorm update_topology topology-name -jar [jarpath] -conf [confpath]]
     """
@@ -300,7 +300,7 @@ def update_topology(*args):
         extrajars=[JSTORM_CONF_DIR, JSTORM_DIR + "/bin", CLIENT_CONF_FILE],
         childopts=childopts)
 
-/// 启动nimbus
+## 启动nimbus
 def nimbus():
     """Syntax: [jstorm nimbus]
 
@@ -319,7 +319,7 @@ def nimbus():
         extrajars=(cppaths+[nimbus_classpath]), 
         childopts=childopts)
 
-/// 启动supervisor
+## 启动supervisor
 def supervisor():
     """Syntax: [jstorm supervisor]
 
@@ -398,7 +398,7 @@ def metrics_Monitor(*args):
         extrajars=[JSTORM_CONF_DIR, JSTORM_DIR + "/bin", CLIENT_CONF_FILE],
         childopts=childopts)
 
-/// 显示正在运行的topology列表
+## 显示正在运行的topology列表
 def list(*args):
     """Syntax: [jstorm list]
 
