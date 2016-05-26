@@ -68,12 +68,16 @@ public class NimbusServer {
     /// thrift服务接口（提交任务、上传jar、关闭、均衡...）
     private ServiceHandler serviceHandler;
 
+    /// 控制任务相关的操作
     private TopologyAssign topologyAssign;
 
+    /// server HA?  非阻塞式服务
     private THsHaServer thriftServer;
 
+    /// 从节点 线程
     private FollowerRunnable follower;
 
+    /// 服务 日志服务
     private Httpserver hs;
 
     private List<AsyncLoopThread> smartThreads = new ArrayList<AsyncLoopThread>();

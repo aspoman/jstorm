@@ -57,6 +57,7 @@ public class TopologyAssign implements Runnable {
 
     private static TopologyAssign instance = null;
 
+    // 单例的TopologyAssign 任务分配
     public static TopologyAssign getInstance() {
         synchronized (TopologyAssign.class) {
             if (instance == null) {

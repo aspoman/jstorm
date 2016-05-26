@@ -61,6 +61,7 @@ import static com.alibaba.jstorm.daemon.nimbus.TopologyMetricsRunnable.*;
 
 /**
  * Thrift callback, all commands handling entrance
+ * Thrift回调接口，所有命令的执行入口
  *
  * @author version 1: lixin, version 2:Longda
  */
