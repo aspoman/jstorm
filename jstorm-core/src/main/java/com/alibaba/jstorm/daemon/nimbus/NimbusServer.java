@@ -129,6 +129,7 @@ public class NimbusServer {
 
             initFollowerThread(conf);
 
+            /// 初始化、启动Httpserver
             int port = ConfigExtension.getNimbusDeamonHttpserverPort(conf);
             hs = new Httpserver(port, conf);
             hs.start();

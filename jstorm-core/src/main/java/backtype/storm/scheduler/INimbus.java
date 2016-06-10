@@ -21,6 +21,10 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * INimbus: 获取资源列表、分配任务、获取hostname、强制调度、prepare（初始化本地调度）
+ */
+
 public interface INimbus {
     void prepare(Map stormConf, String schedulerLocalDir);
 

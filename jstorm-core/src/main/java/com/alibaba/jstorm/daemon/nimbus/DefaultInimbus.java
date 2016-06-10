@@ -28,6 +28,10 @@ import backtype.storm.scheduler.SupervisorDetails;
 import backtype.storm.scheduler.Topologies;
 import backtype.storm.scheduler.WorkerSlot;
 
+/**
+ * INimbus默认实现 DefaultInimbus
+ * 获取可用的slots
+ */
 public class DefaultInimbus implements INimbus {
 
     @Override

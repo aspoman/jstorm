@@ -26,6 +26,11 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
+/**
+ * 本地模式
+ * 提供本地运行的各个组件
+ * 本地模式的各个命令实现
+ */
 public class LocalCluster implements ILocalCluster {
 
     public static Logger LOG = LoggerFactory.getLogger(LocalCluster.class);
