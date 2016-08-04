@@ -89,6 +89,7 @@ public class Supervisor {
 
         StormClusterState stormClusterState = Cluster.mk_storm_cluster_state(conf);
 
+        /// getHostName
         String hostName = JStormServerUtils.getHostName(conf);
         WorkerReportError workerReportError =
                 new WorkerReportError(stormClusterState, hostName);
@@ -181,18 +182,25 @@ public class Supervisor {
 
         SupervisorManger supervisorManager = null;
         try {
+            /// 读取配置
             Map<Object, Object> conf = Utils.readStormConfig();
 
+            /// 是否集群模式
             StormConfig.validate_distributed_mode(conf);
 
+            /// 创建本地pid文件,标记是否运行
             createPid(conf);
 
+            /// 创建supervisor进程
             supervisorManager = mkSupervisor(conf, null);
 
+            /// 输出重定向
             JStormUtils.redirectOutput("/dev/null");
 
+            /// jvm关闭时的钩子程序
             initShutdownHook(supervisorManager);
 
+            /// supevisor循环判断
             while (supervisorManager.isFinishShutdown() == false) {
                 try {
                     Thread.sleep(1000);

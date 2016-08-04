@@ -122,11 +122,13 @@ public class NimbusServer {
             /// 初始化 shutdown 命令钩子
             initShutdownHook();
 
-            ///
+            /// 初始化本地调度/其实是获取可用的slots,但代码没有涉及到
             inimbus.prepare(conf, StormConfig.masterInimbus(conf));
 
+            /// NimbusData 存储nimbus的所有信息
             data = createNimbusData(conf, inimbus);
 
+            /// ? standby nimbus
             initFollowerThread(conf);
 
             /// 初始化、启动Httpserver
@@ -134,6 +136,7 @@ public class NimbusServer {
             hs = new Httpserver(port, conf);
             hs.start();
 
+            /// 线程池:开辟线程工作, 此处考虑是心跳线程
             initContainerHBThread(conf);
 
             /// 不是learder时睡眠等待
@@ -190,7 +193,7 @@ public class NimbusServer {
 
         /// 集群模式下
         if (!data.isLocalMode()) {
-        	
+
         	//data.startMetricThreads();
 
             /// 监控
