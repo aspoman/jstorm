@@ -35,12 +35,14 @@ public class config_value {
      * @param args
      */
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        if (args == null || args.length == 0) {
+
+        /*if (args == null || args.length == 0) {
             throw new InvalidParameterException("Should input key name");
         }
 
         String key = args[0];
+        */
+        String key = "storm.zookeeper.servers";
 
         Map conf = Utils.readStormConfig();
 

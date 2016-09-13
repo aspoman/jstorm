@@ -98,9 +98,11 @@ public class StormSubmitter {
      */
     public static void submitTopology(String name, Map stormConf, StormTopology topology, SubmitOptions opts) throws AlreadyAliveException,
             InvalidTopologyException {
+        /// validate isJson
         if (!Utils.isValidConf(stormConf)) {
             throw new IllegalArgumentException("Storm conf is not valid. Must be json-serializable");
         }
+
         stormConf = new HashMap(stormConf);
         stormConf.putAll(Utils.readCommandLineOpts());
         Map conf = Utils.readStormConfig();
@@ -108,16 +110,20 @@ public class StormSubmitter {
         putUserInfo(conf, stormConf);
         try {
             String serConf = Utils.to_json(stormConf);
+            /// 是否本地运行状态
             if (localNimbus != null) {
                 LOG.info("Submitting topology " + name + " in local mode");
                 localNimbus.submitTopology(name, null, serConf, topology);
             } else {
+                /// 得到client
                 NimbusClient client = NimbusClient.getConfiguredClient(conf);
                 try {
+                    /// 判断拓扑是否存在
                     if (topologyNameExists(client, conf, name)) {
                         throw new RuntimeException("Topology with name `" + name + "` already exists on cluster");
                     }
 
+                    /// 提交jar包
                     submitJar(client, conf);
                     LOG.info("Submitting topology " + name + " in distributed mode with conf " + serConf);
                     if (opts != null) {

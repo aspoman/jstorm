@@ -84,6 +84,7 @@ public class ThriftClient {
         this.type = type;
         this.asUser = asUser;
 
+        /// get master
         getMaster(conf, host, port);
         reconnect();
     }
@@ -125,6 +126,7 @@ public class ThriftClient {
             this.hostPort = host + ":" + port;
         } else {
             try {
+                /// 通过zk获取master信息
                 hostPort = ThriftClient.getMasterByZk(conf);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
