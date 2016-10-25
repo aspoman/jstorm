@@ -31,21 +31,24 @@ import backtype.storm.utils.Utils;
  */
 public class config_value {
 
-    /**
-     * @param args
-     */
     public static void main(String[] args) {
+<<<<<<< HEAD
 
         /*if (args == null || args.length == 0) {
+=======
+        if (args == null || args.length == 0) {
+>>>>>>> master
             throw new InvalidParameterException("Should input key name");
         }
 
         String key = args[0];
+<<<<<<< HEAD
         */
         String key = "storm.zookeeper.servers";
 
+=======
+>>>>>>> master
         Map conf = Utils.readStormConfig();
-
         System.out.print("VALUE: " + String.valueOf(conf.get(key)));
     }
 
