@@ -220,7 +220,6 @@ def zktool(*args):
         args=args,
         childopts=childopts)
 
-##关闭topology任务
 def kill(*args):
     """Syntax: [jstorm kill topology-name [wait-time-secs]]
 
@@ -239,7 +238,6 @@ def kill(*args):
         extrajars=[JSTORM_CONF_DIR, JSTORM_DIR + "/bin", CLIENT_CONF_FILE],
         childopts=childopts)
 
-## 重新启用topology
 def activate(*args):
     """Syntax: [jstorm activate topology-name]
 
